@@ -1,20 +1,35 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title class="ion-text-center"> Open Trivia </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ion-padding">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Votre pseudo</ion-label>
+        <ion-input placeholder="Entrez votre pseudo" [(ngModel)]="pseudo"></ion-input>
+      </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <ion-item>
+        <ion-label>Difficulté</ion-label>
+        <ion-select [(ngModel)]="difficulte">
+          <ion-select-option value="easy">Easy</ion-select-option>
+          <ion-select-option value="medium">Medium</ion-select-option>
+          <ion-select-option value="hard">Hard</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-toggle></ion-toggle>
+      <ion-label [(ngModel)]="sauvegarder" ngDefaultControl>
+        Sauvegarder mes informations
+      </ion-label>
+    </ion-item>
+
+    <ion-button expand="full" (click)="commencer()">Commencer</ion-button>
+    <p *ngIf="error && error.length > 0">{{error}}</p>
   </div>
 </ion-content>

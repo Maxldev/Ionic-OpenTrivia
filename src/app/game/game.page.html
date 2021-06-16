@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center"> Open Trivia - difficulté :  {{ difficulte }}  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <h3 class="ion-text-center">Bienvenue {{pseudo}} </h3>
+    <p class="ion-text-center" [innerHTML]="questionEnCours?.question"></p>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let proposition of choix" size="6">
+          <ion-button [ngClass]="{
+          'vrai': (allerQuestionSuivante && proposition===questionEnCours.correct_answer) || (finDuGame && proposition===questionEnCours.correct_answer), 
+          'faux' : (allerQuestionSuivante && proposition!==questionEnCours.correct_answer) || (finDuGame && proposition!==questionEnCours.correct_answer), 
+          'nonchoisi' : !allerQuestionSuivante && !finDuGame
+        }" color="transparent" expand="full" (click)="correction(proposition)">{{ proposition }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-button expand="full" *ngIf="allerQuestionSuivante" (click)="questionSuivante()">Question suivante</ion-button>
+    <ion-button expand="full" *ngIf="finDuGame" [routerLink]="['/score/', points]" (click)="quitter()">Voir les scores</ion-button>
+
+  </div>
+</ion-content>
